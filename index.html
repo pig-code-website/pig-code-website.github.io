@@ -22,11 +22,12 @@
         document.getElementById("mainbox").innerHTML = "";
       }
     };
+    Bmob.initialize("9a7dbe424a6dd457","081126");
   </script>
   <script>
     function login()
     {
-      document.getElementById("loginbox").innerHTML = "<table border=10><tr><td><span style='font-size:2em'>登录</span><br>用户名<input type=text maxlength=24 id=username><br>密码<input type=password maxlength=16 id=password><br><a onclick=javascript:register();>没有账户？点我注册</a><br><div id=login-status></div><br><span style='background:#00ff00;color:white;font-size:1.5em' onclick=javascript:submit_form_login();position:absolute;top:90%;right:0%>登录</span><span style='background:red;color:white;font-size:1.5em;position:absolute;bottom:90%;right:0%' javascript:close_box_login();>X</span></td></tr></table>";
+      document.getElementById("loginbox").innerHTML = "<table border=10><tr><td><span style='font-size:2em'>登录</span><br>用户名<input type=text maxlength=24 id=username><br>密码<input type=password maxlength=16 id=password><br><a onclick=javascript:register();>没有账户？点我注册</a><br><div id=login-status></div><br><span style='background:#00ff00;color:white;font-size:1.5em' onclick=javascript:submit_form_login();position:absolute;top:90%;right:0%>登录</span><span style='background:red;color:white;font-size:1.5em;position:absolute;bottom:90%;right:0%' onclick=javascript:close_box_login();>X</span></td></tr></table>";
       document.getElementById("loginbox").className = "show-element";
     }
     function close_box_login()
@@ -35,9 +36,69 @@
     }
     function register()
     {
-      document.getElementById("loginbox").innerHTML = "<table border=10><tr><td><span style='font-size:2em'>注册</span><br>用户名<input type=text maxlength=24 id=username><br>密码<input type=password maxlength=16 id=password><br>验证密码<input type=password maxlength=16 id=password2><br><a onclick=javascript:login();>登录</a><br><div id=login-status></div><br><span style='background:#00ff00;color:white;font-size:1.5em;position:absolute;top:90%;right:0%' onclick=javascript:submit_form_register();>注册</span><span style='background:red;color:white;font-size:1.5em;position:absolute;bottom:90%;right:0%' javascript:close_box_login();>X</span></td></tr></table>";
+      document.getElementById("loginbox").innerHTML = "<table border=10><tr><td><span style='font-size:2em'>注册</span><br>用户名<input type=text maxlength=24 id=username><br>密码<input type=password maxlength=16 id=password><br>验证密码<input type=password maxlength=16 id=password2><br><a onclick=javascript:login();>登录</a><br><div id=login-status></div><br><span style='background:#00ff00;color:white;font-size:1.5em;position:absolute;top:90%;right:0%' onclick=javascript:submit_form_register();>注册</span><span style='background:red;color:white;font-size:1.5em;position:absolute;bottom:90%;right:0%' onclick=javascript:close_box_login();>X</span></td></tr></table>";
       document.getElementById("loginbox").className = "show-element";
     }
+    function submit_form_login()
+    {
+      var username = document.getElementById("username").value;
+      var password = document.getElementById("password").value;
+      Bmob.User.login(username,password).then(res => {
+        console.log(res);
+        sessionStorage.setItem("username",username);
+        sessionStorage.setItem("uuid",res.result.uuid);
+        var i = 0;
+        setInterval(function(){
+          document.getElementById("login-status").innerHTML = "<font color=#00ff00>登录成功！将在" + (10 - i) + "秒后刷新</font>";
+          i++;
+          if (i > 10)
+            location.reload();
+        },1000);
+      }.catch(err => {
+              console.log(err);
+              if (err.code == 101)
+                document.getElementById("login-status").innerHTML = "<font color=red>登录失败！用户名或密码错误</font>";
+        });
+    }
+    function submit_form_register()
+    {
+      var username = document.getElementById("username").value;
+      var password = document.getElementById("password").value;
+      var email = Math.random().toString().substring(3) + "@smtp.pig.org";
+      var phone = parseInt(Math.random().toString().substring(3,14));
+      let userinfo = {"username":username,"password":password,"phone":phone,"email":email};
+      var q = Bmob.Query("userinfo");
+      q.set("username",username);
+      q.set("password",password);
+      q.save().then(res=> {
+        var r1 = res;
+        console.log(res);
+        Bmob.User.register(userinfo).then(res => {
+          console.log(res);
+          sessionStorage.setItem("username",username);
+          sessionStorage.setItem("uuid",r1.objectId);
+         var i = 0;
+         setInterval(function(){
+            document.getElementById("login-status").innerHTML = "<font color=#00ff00>注册成功！将在" + (10 - i) + "秒后刷新</font>";
+            i++;
+            if (i > 10)
+             location.reload();
+          },1000);
+        }).catch(err => {
+               console.log(err);
+               if (err.code == 400 || err.code == 203)
+                  submit_form_register();
+                if (err.code == 202)
+                  document.getElementById("login-status").innerHTML = "<font color=red>注册失败！用户名重复！";
+                 
+         });
+     }).catch(err => {
+        console.log(err);
+        submit_form_register();
+      });
+    }
+    
+  
   </script>
   <style>
     .hide-element
