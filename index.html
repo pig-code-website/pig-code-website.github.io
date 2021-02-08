@@ -121,6 +121,7 @@
             }).catch(err => {
               console.log(err);
               document.getElementById("getstatus").innerHTML = "<font color=red>未知的错误</font>";
+            });
           } else
             document.getElementById("getstatus").innerHTML = "<font color=red>错误：您已订阅过该教程，无法再次订阅</font>";
         } else 
