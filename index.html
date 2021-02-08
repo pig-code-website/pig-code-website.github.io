@@ -8,9 +8,9 @@
     onload = function () {
       var username = sessionStorage.getItem("username");
       var uuid = sessionStorage.getItem("uuid");
-      if ((username == null || username == "") && (uuid != null || uuid != ""))
+      if ((username == null || username == "") && (uuid != null && uuid != ""))
         login();
-      if ((username != null || username != "") && (uuid == null || uuid == ""))
+      if ((username != null && username != "") && (uuid == null || uuid == ""))
         login();
       if (username == null && uuid == null)
       {
@@ -35,7 +35,7 @@
     }
     function register()
     {
-      document.getElementById("loginbox").innerHTML = "<table border=10><tr><td><span style='font-size:2em'>注册</span><br>用户名<input type=text maxlength=24 id=username><br>密码<input type=password maxlength=16 id=password><br>验证密码<input type=password maxlength=16 id=password2><br><a onclick=javascript:login();>登录</a><br><div id=login-status></div><br><span style='background:#00ff00;color:white;font-size:1.5em;position:absolute;bottom:0%;right:0%' onclick=javascript:submit_form_register();>注册</span><span style='background:red;color:white;font-size:1.5em;position:absolute;top:0%;right:0%' javascript:close_box_login();>X</span></td></tr></table>";
+      document.getElementById("loginbox").innerHTML = "<table border=10><tr><td><span style='font-size:2em'>注册</span><br>用户名<input type=text maxlength=24 id=username><br>密码<input type=password maxlength=16 id=password><br>验证密码<input type=password maxlength=16 id=password2><br><a onclick=javascript:login();>登录</a><br><div id=login-status></div><br><span style='background:#00ff00;color:white;font-size:1.5em;position:absolute;bottom:100%;right:0%' onclick=javascript:submit_form_register();>注册</span><span style='background:red;color:white;font-size:1.5em;position:absolute;top:100%;right:0%' javascript:close_box_login();>X</span></td></tr></table>";
       document.getElementById("loginbox").className = "show-element";
     }
   </script>
