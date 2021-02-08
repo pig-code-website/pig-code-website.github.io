@@ -96,7 +96,8 @@
         default:return;
       }
       const query = Bmob.Query("userinfo");
-      Bmob.get(query).then(res => {
+      var uuid = sessionStorage.getItem("uuid");
+      query.get(uuid).then(res => {
         console.log(res);
         var pigcoin = res.pigcoin;
         if (typeof res.mybook == "undefined")
