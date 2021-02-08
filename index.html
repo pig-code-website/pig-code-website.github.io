@@ -44,7 +44,7 @@
       n = n.split("/")[1];
       var pigcoin = sessionStorage.getItem("pigcoin");
       pigcoin = parseInt(pigcoin);
-      var book = sessionStorage.setItem("book");
+      var book = sessionStorage.getItem("book");
       if (book == null || book == "")
         book = {};
       else
