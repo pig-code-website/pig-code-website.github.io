@@ -42,6 +42,7 @@
     function getbook(n)
     {
       n = n.split("/")[1];
+      sessionStorage.setItem("bookid",n);
       var pigcoin = sessionStorage.getItem("pigcoin");
       pigcoin = parseInt(pigcoin);
       var book = sessionStorage.getItem("book");
@@ -75,6 +76,60 @@
         document.getElementById("get-box").innerHTML = "<table border=10><tr><td><span style='font-size:2em'>订阅</span><br>您订阅的是：" + n + "教程 价格：" + price + "猪头<br>您有" + pigcoin + "猪头<br><font color=red>小猪提示：您现在正在进行金钱交易<br>请谨慎操作，操作后不得撤销<br>请检查电脑中是否有木马、监控等软件<br>请检查是否有人对端口进行监听</font><br><div id=getstatus><font color=red>您的猪头不足，无法订阅</font></div><br><span style='background:red;color:white;font-size:1.5em;position:absolute;top:90%;right:0%'>订阅</span><span style='background:red;color:white;font-size:1.5em;position:absolute;bottom:90%;right:0%' onclick=javascript:close_box_get();>X</span></td></tr></table>";       
       document.getElementById("get-box").className = "show-element";
     }
+    function submit_form_book()
+    {
+      var price;
+      var bookid = sessionStorage.getItem("bookid");
+      switch(bookid)
+      {
+        case "c":price = 800;break;
+        case "classic-asp":price = 500;break;
+        case "javascript":price = 600;break;
+        case "html":price = 100;break;
+        case "css":price = 500;break;
+        case "xml":price = 20;break;
+        case "json":price = 20;break;
+        case "ajax":price = 50;break;
+        case "html-dom":price = 500;break;
+        case "svg":price = 50;break;
+        case "cmd":price = 100;break;
+        default:return;
+      }
+      const query = Bmob.Query("userinfo");
+      Bmob.get(query).then(res => {
+        console.log(res);
+        var pigcoin = res.pigcoin;
+        if (typeof res.mybook == "undefined")
+          var book = {};
+        else
+          var book = JSON.parse(res.mybook);
+        if (pigcoin > price)
+        {
+          if (typeof book[bookid] == "undefined")
+          {
+            query.set("id",res.objectId);
+            pigcoin -= price;
+            book[bookid] = true;
+            book = JSON.stringify(book);
+            query.set("pigcoin",pigcoin);
+            query.set("mybook",book);
+            query.save().then(res => {
+              console.log(res);
+              document.getElementById("getstatus").innerHTML = "<font color=#00ff00>订阅成功！</font>";
+              sessionStorage.setItem("pigcoin",pigcoin);
+              sessionStorage.setItem("book",book);
+            }).catch(err => {
+              console.log(err);
+              document.getElementById("getstatus").innerHTML = "<font color=red>未知的错误</font>";
+          } else
+            document.getElementById("getstatus").innerHTML = "<font color=red>错误：您已订阅过该教程，无法再次订阅</font>";
+        } else 
+          document.getElementById("getstatus").innerHTML = "<font color=red>错误：您的猪头不足！无法订阅</font>";
+      }).catch(err => {
+        document.getElementById("getstatus").innerHTML = "<font color=red>未知的错误</font>";
+      });
+      
+    }
     function register()
     {
       document.getElementById("loginbox").innerHTML = "<table border=10><tr><td><span style='font-size:2em'>注册</span><br>用户名<input type=text maxlength=24 id=username><br>密码<input type=password maxlength=16 id=password><br>验证密码<input type=password maxlength=16 id=password2><br><a onclick=javascript:login();>登录</a><br><div id=login-status></div><br><span style='background:#00ff00;color:white;font-size:1.5em;position:absolute;top:90%;right:0%' onclick=javascript:submit_form_register();>注册</span><span style='background:red;color:white;font-size:1.5em;position:absolute;bottom:90%;right:0%' onclick=javascript:close_box_login();>X</span></td></tr></table>";
@@ -96,7 +151,7 @@
           if (typeof res.mybook == "undefined")
             sessionStorage.setItem("book","");
           else
-            sessionStorage.setItem("book",JSON.stringify(res.mybook));
+            sessionStorage.setItem("book",res.mybook);
         }).catch(err => {
           console.log(err);
         });
