@@ -47,7 +47,7 @@
       Bmob.User.login(username,password).then(res => {
         console.log(res);
         sessionStorage.setItem("username",username);
-        sessionStorage.setItem("uuid",res.result.uuid);
+        sessionStorage.setItem("uuid",res.uuid);
         var i = 0;
         setInterval(function(){
           document.getElementById("login-status").innerHTML = "<font color=#00ff00>登录成功！将在" + (10 - i) + "秒后刷新</font>";
