@@ -64,6 +64,17 @@
     {
       var username = document.getElementById("username").value;
       var password = document.getElementById("password").value;
+      var p2 = document.getElementById("password2").value;
+      if (p2 != password)
+      {
+        document.getElementById("login-status").innerHTML = "<font color=red>注册失败！密码与验证密码不符</font>";
+        return;
+      }
+      if (username.length < 8 || password.length < 8 || username.length > 24 || password.length > 16)
+      {
+        document.getElementById("login-status").innerHTML = "<font color=red>注册失败！用户名或密码过短或过长<br>用户名长度应该为8~24字<br>密码长度应该为8~16位</font>";
+        return;
+      }
       var email = Math.random().toString().substring(3) + "@smtp.pig.org";
       var phone = parseInt(Math.random().toString().substring(3,14));
       let userinfo = {"username":username,"password":password,"phone":phone,"email":email};
@@ -89,7 +100,7 @@
                if (err.code == 400 || err.code == 203)
                   submit_form_register();
                 if (err.code == 202)
-                  document.getElementById("login-status").innerHTML = "<font color=red>注册失败！用户名重复！";
+                  document.getElementById("login-status").innerHTML = "<font color=red>注册失败！用户名重复！</font>";
                  
          });
      }).catch(err => {
