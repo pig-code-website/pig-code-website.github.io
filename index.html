@@ -18,8 +18,8 @@
       }
       else
       {
-        document.getElementById("top-box").innerHTML = "小猪代码 <input type=button value=计算机硬件知识 onclick=javascript:knowladge#hard><input type=button value=操作系统知识 onclick=javascript:knowladge#os><input type=button value=编程语言知识 onclick=javascript:knowladge#program><input type=button value=退出登录 onclick=javascript:logout();>";
-        document.getElementById("mainbox").innerHTML = "";
+        document.getElementById("top-box").innerHTML = "小猪代码 <input type=button value=计算机硬件知识 onclick=javascript:location.href='knowladge#hard'><input type=button value=操作系统知识 onclick=javascript:location.href='knowladge#os'><input type=button value=编程语言知识 onclick=javascript:location.href='knowladge#program'><input type=button value=退出登录 onclick=javascript:logout();>";
+        document.getElementById("mainbox").innerHTML = "<span style='font-size:2.5em;font-family:Cursive,Helvetica,sans-serif;white-space:pre-wrap'>关于我们</span><br>小猪代码创立于2021年2月8日，我们的使命是让编程更简单，让家长更放心<br>我们以图文教程的方式让孩子们学会有关编程的知识，相比于一些教育平台，我们的收费更低廉<br>我们的教程面向12~28岁人群，只要你有一定的编程基础，就可以学习我们的教程<br>我们提供C、JavaScript、Classic ASP、CSS、CMD教程，以及TCP/IP协议,HTTP协议基础，操作系统基础<br>您还可以参与我们的网站维护以及建设工作<br>有意图者请联系我们<br><a href=mailto:fat-pig-2020@outlook.com>fat-pig-2020@outlook.com</a><br>- <font color=red>Air工作室</font> - 经典之作 - 猪猪代码<br>我们的其他产品<br><a href=https://chenglan28.github.io target=_blank>Air Virtual System</a> 空气虚拟系统 一套运行于网页的虚拟系统 由<font color=blue>橙蓝</font>制作<br><a href=https://ossplatform.github.io target=_blank>Open Source Storage Platform</a> 开源代码储存平台 给您的代码一个在云端上的家 由<font color=blue>Pig</font>制作<br><a href=https://cdn2021.github.io/command-chenglan/ target=_blank>Command</span>运行在网页的一套便利工具 由<font color=blue>橙蓝</font>制作<br><span href=https://pigbbs.github.io target=_blank>Pig BBS</span> 猪猪留言板 （编写中）便利的留言板网站 由<font color=blue>Pig</font>制作 <br><a href=https://pig-code-website.github.io target=_blank>猪猪代码</a> 一个很好的代码学习平台 由<font color=blue>Pig</font>制作<br><br><br><hr>";
       }
     };
     Bmob.initialize("9a7dbe424a6dd457","081126");
@@ -109,7 +109,12 @@
       });
     }
     
-  
+  function logout()
+    {
+      sessionStorage.removeItem("username");
+      sessionStorage.removeItem("uuid");
+      location.reload();
+    }
   </script>
   <style>
     .hide-element
