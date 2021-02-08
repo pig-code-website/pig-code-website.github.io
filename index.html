@@ -1,1 +1,24 @@
-
+<!doctype html>
+<head>
+  <meta charset="utf-8">
+  <meta keyword="小猪代码">
+  <title>小猪代码</title>
+  <script>
+    document.body.onload = function () {
+      var username = sessionStorage.getItem("username");
+      var uuid = sessionStorage.getItem("uuid");
+      if ((username == null || username == "") && (uuid != null || uuid != ""))
+        login();
+      if ((username != null || username != "") && (uuid == null || uuid == ""))
+        login();
+      
+    };
+  </script>
+</head>
+<body>
+  <span style='color:white;background:black;text-align:center'></span>
+  <span style='font-size:3em;text-align:center;'>小猪代码</span>
+  <div id=mainbox>
+    <span style='font-size:2em;text-align:center;color:red'>在您开始学习前，我们建议您先注册/登录<br><input type=button value=注册 onclick=javascript:register();><br><input type=button value=登录 onclick=javascript:login();></span>
+  </div>
+</body>
