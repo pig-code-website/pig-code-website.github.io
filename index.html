@@ -85,6 +85,7 @@
       q.save().then(res=> {
         var r1 = res;
         console.log(res);
+        userinfo.uuid = r1.objectId;
         Bmob.User.register(userinfo).then(res => {
           console.log(res);
           sessionStorage.setItem("username",username);
