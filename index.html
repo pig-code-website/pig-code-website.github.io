@@ -11,12 +11,20 @@
         login();
       if ((username != null || username != "") && (uuid == null || uuid == ""))
         login();
-      
+      if (username == null && uuid == null)
+      {
+        document.getElementById("top-box").innerHTML = "小猪代码 <input type=button value=登录 onclick=javascript:login();> <input type=button value=注册 onclick=javascript:register();>";
+      }
+      else
+      {
+        document.getElementById("top-box").innerHTML = "小猪代码 <input type=button value=计算机硬件知识 onclick=javascript:knowladge#hard><input type=button value=操作系统知识 onclick=javascript:knowladge#os><input type=button value=编程语言知识 onclick=javascript:knowladge#program><input type=button value=退出登录 onclick=javascript:logout();>
+        document.getElementById("mainbox).innerHTML = "";
+      }
     };
   </script>
 </head>
 <body>
-  <span style='color:white;background:black;text-align:center'></span>
+  <span style='color:white;background:black;text-align:center' id=top-box></span>
   <span style='font-size:3em;text-align:center;'>小猪代码</span>
   <div id=mainbox>
     <span style='font-size:2em;text-align:center;color:red'>在您开始学习前，我们建议您先注册/登录<br><input type=button value=注册 onclick=javascript:register();><br><input type=button value=登录 onclick=javascript:login();></span>
