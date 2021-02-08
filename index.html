@@ -26,17 +26,17 @@
   <script>
     function login()
     {
-      document.getElementById("loginbox").innerHTML = "<table border=10><tr><td><span style='font-size:2em'>登录</span><br>用户名<input type=text maxlength=24 id=username><br>密码<input type=password maxlength=16 id=password><br><a onclick=javascript:register();>没有账户？点我注册</a><br><div id=login-status></div><br><span style='background:#00ff00;color:white;font-size:1.5em' onclick=javascript:submit-form-login();>登录</span><span style='background:red;color:white;font-size:1.5em' javascript:close_box_login();>退出</span></td></tr></table>";
-      document.getElementById("loginbox").class = "show-element";
+      document.getElementById("loginbox").innerHTML = "<table border=10><tr><td><span style='font-size:2em'>登录</span><br>用户名<input type=text maxlength=24 id=username><br>密码<input type=password maxlength=16 id=password><br><a onclick=javascript:register();>没有账户？点我注册</a><br><div id=login-status></div><br><span style='background:#00ff00;color:white;font-size:1.5em' onclick=javascript:submit_form_login();>登录</span><span style='background:red;color:white;font-size:1.5em' javascript:close_box_login();>退出</span></td></tr></table>";
+      document.getElementById("loginbox").className = "show-element";
     }
     function close_box_login()
     {
-      document.getElementById("loginbox").class = "hide-element";
+      document.getElementById("loginbox").className = "hide-element";
     }
     function register()
     {
-      document.getElementById("loginbox").innerHTML = "<table border=10><tr><td><span style='font-size:2em'>注册</span><br>用户名<input type=text maxlength=24 id=username><br>密码<input type=password maxlength=16 id=password><br>验证密码<input type=password maxlength=16 id=password2><br><a onclick=javascript:login();>登录</a><br><div id=login-status></div><br><span style='background:#00ff00;color:white;font-size:1.5em' onclick=javascript:submit-form-register();注册</span><span style='background:red;color:white;font-size:1.5em' javascript:close_box_login();>退出</span></td></tr></table>";
-      document.getElementById("loginbox").class = "show-element";
+      document.getElementById("loginbox").innerHTML = "<table border=10><tr><td><span style='font-size:2em'>注册</span><br>用户名<input type=text maxlength=24 id=username><br>密码<input type=password maxlength=16 id=password><br>验证密码<input type=password maxlength=16 id=password2><br><a onclick=javascript:login();>登录</a><br><div id=login-status></div><br><span style='background:#00ff00;color:white;font-size:1.5em' onclick=javascript:submit_form_register();>注册</span><span style='background:red;color:white;font-size:1.5em' javascript:close_box_login();>退出</span></td></tr></table>";
+      document.getElementById("loginbox").className = "show-element";
     }
   </script>
   <style>
@@ -53,6 +53,6 @@
   <div id=mainbox>
     <span style='font-size:2em;color:red'>在您开始学习前，我们建议您先注册/登录<br><input type=button value=注册 onclick=javascript:register();><br><input type=button value=登录 onclick=javascript:login();></span>
   </div>
-    <div id=loginbox class=hide-element style='position:fixed;top:10%;left:40%'></div>
+    <div id=loginbox class=hide-element style='position:fixed;top:20%;left:40%;color:black;background:white'></div>
   </center>
 </body>
