@@ -17,16 +17,18 @@
       }
       else
       {
-        document.getElementById("top-box").innerHTML = "小猪代码 <input type=button value=计算机硬件知识 onclick=javascript:knowladge#hard><input type=button value=操作系统知识 onclick=javascript:knowladge#os><input type=button value=编程语言知识 onclick=javascript:knowladge#program><input type=button value=退出登录 onclick=javascript:logout();>
+        document.getElementById("top-box").innerHTML = "小猪代码 <input type=button value=计算机硬件知识 onclick=javascript:knowladge#hard><input type=button value=操作系统知识 onclick=javascript:knowladge#os><input type=button value=编程语言知识 onclick=javascript:knowladge#program><input type=button value=退出登录 onclick=javascript:logout();>";
         document.getElementById("mainbox).innerHTML = "";
       }
     };
   </script>
 </head>
 <body>
+  <center>
   <span style='color:white;background:black;text-ailgn:center' id=top-box></span>
   <span style='font-size:3em;text-ailgn:center;'>小猪代码</span>
   <div id=mainbox>
-    <span style='font-size:2em;text-ailgn:center;color:red'>在您开始学习前，我们建议您先注册/登录<br><input type=button value=注册 onclick=javascript:register();><br><input type=button value=登录 onclick=javascript:login();></span>
+    <span style='font-size:2em;color:red'>在您开始学习前，我们建议您先注册/登录<br><input type=button value=注册 onclick=javascript:register();><br><input type=button value=登录 onclick=javascript:login();></span>
   </div>
+  </center>
 </body>
