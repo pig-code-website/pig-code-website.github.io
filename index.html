@@ -157,7 +157,7 @@
             sessionStorage.setItem("book",res.mybook);
         }).catch(err => {
           console.log(err);
-          document.getElementById9"login-status").innerHTML = "<font color=red>未知的错误</font>";
+          document.getElementById("login-status").innerHTML = "<font color=red>未知的错误</font>";
         });
         setInterval(function(){
           document.getElementById("login-status").innerHTML = "<font color=#00ff00>登录成功！将在" + (10 - i) + "秒后刷新</font>";
