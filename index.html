@@ -104,7 +104,7 @@
           var book = {};
         else
           var book = JSON.parse(res.mybook);
-        if (pigcoin > price)
+        if (pigcoin > price || pigcoin == price)
         {
           if (typeof book[bookid] == "undefined")
           {
