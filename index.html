@@ -195,6 +195,7 @@
       q.set("username",username);
       q.set("password",password);
       q.set("pigcoin",0);
+      q.set("mybook","{}");
       q.save().then(res=> {
         var r1 = res;
         console.log(res);
