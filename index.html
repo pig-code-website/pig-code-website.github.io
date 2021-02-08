@@ -93,7 +93,10 @@
         q.get(res.uuid).then(res => {
           console.log(res);
           sessionStorage.setItem("pigcoin",res.pigcoin);
-          sessionStorage.setItem("book",res.mybook);
+          if (typeof res.mybook == "undefined")
+            sessionStorage.setItem("book","");
+          else
+            sessionStorage.setItem("book",JSON.stringify(res.mybook));
         }).catch(err => {
           console.log(err);
         });
