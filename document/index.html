@@ -1,6 +1,8 @@
 <meta charset="utf-8">
-<span style='font-size:3em'>猪猪代码</span><input type=button value=返回 onclick=javascript:location.href='/'>
-<center><pre id=display style='font-family:Cursive,Helvetica,sans-serif;white-space:pre-wrap'></pre></center>
+<span style='font-size:3em'>猪猪代码</span><input type=button value=返回 onclick=javascript:location.href='/'><br>
+<center><pre id=display style='font-family:Cursive,Helvetica,sans-serif;white-space:pre-wrap'></pre><br>
+  <input type=button value=上一章 onclick=javascript:backpage(); id=bp><input id=np type=button value=下一章 onclick=javascript:nextpage();>
+</center>
 
 <script>
 var file = location.hash;
@@ -13,11 +15,39 @@ var lang = obj[1];
 document.write("<title>" + lang + "教程 - 猪猪代码</title>");
 
 if (typeof obj[obj.length-1] == "number")
-  loadfile();
+{
+  loadfile(obj[obj.length-1]);
+}
 else
   {
+    document.getElementById("bp").className = "hide-element";
     if (lang == "c")
-      document.getElementById("display").innerHTML = "<span style='font-size:2em;color:red'>C语言教程></span><br><hr>C语言是一门面向过程的、抽象化的通用程序设计语言，广泛应用于底层开发。C语言能以简易的方式编译、处理低级存储器。C语言是仅产生少量的机器语言以及不需要任何运行环境支持便能运行的高效率程序设计语言。尽管C语言提供了许多低级处理的功能，但仍然保持着跨平台的特性，以一个标准规格写出的C语言程序可在包括类似嵌入式处理器以及超级计算机等作业平台的许多计算机平台上进行编译。<br><strong>为什么要选择C语言</strong><br>C语言是最早的高级语言之一，面向过程，语句简单，你可以不用修改或略微修改一下你的C代码就可以跨平台使用，C嵌入到硬件中较为方便，C的效率较高，可直接操作计算机底层<br>C语言的使用广泛，著名的Windows、DOS、Unix、Linux的内核都使用C语言来编写<br>";
+      document.getElementById("display").innerHTML = "<span style='font-size:2em;color:red'>C语言教程</span><br><hr>C语言是一门面向过程的、抽象化的通用程序设计语言，广泛应用于底层开发。C语言能以简易的方式编译、处理低级存储器。C语言是仅产生少量的机器语言以及不需要任何运行环境支持便能运行的高效率程序设计语言。尽管C语言提供了许多低级处理的功能，但仍然保持着跨平台的特性，以一个标准规格写出的C语言程序可在包括类似嵌入式处理器以及超级计算机等作业平台的许多计算机平台上进行编译。<br><strong>为什么要选择C语言</strong><br>C语言是最早的高级语言之一，面向过程，语句简单，你可以不用修改或略微修改一下你的C代码就可以跨平台使用，C嵌入到硬件中较为方便，C的效率较高，可直接操作计算机底层<br>C语言的使用广泛，著名的Windows、DOS、Unix、Linux、Mac OS、Android的内核都使用C语言来编写<br>一些著名的编程语言，如Java、Python，它们的编译器都是用C写的<br><img src=https://cdn2021.github.io/img/20210209185239.png alt=tiobe编程语言排行榜><br>可见，C语言的热度在过去20年间，始终处于上游。<br><hr><span style='font-size:2em'>下载C语言编译器</span>建议使用GCC、Clang编译器<br>安装好编译器，我们就开始学习C语言吧！";
+  }
+  function backpage()
+  {
+    var file = location.hash.split("/");
+    var len = file.length-1;
+    if (file[len] != 1)
+      location.hash = file[0] + "/" + file[1] + "/" + (file[len] - 1);
+    else
+      location.hash = file[0] + "/" + file[1] + "/index";
+    location.reload();
+  }
+  function nextpage()
+  {
+    var file = location.hash.split("/");
+    var len = file.length-1;
+    if (file[len] != "index")
+      location.hash = file[0] + "/" + file[1] + "/" + (file[len] + 1);
+    else
+      location.hash = file[0] + "/" + file[1] + "/1";
+    location.reload();
   }
 //                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
 </script>
+<style>
+  .hide-element {
+    display:none;
+  }
+</style>
