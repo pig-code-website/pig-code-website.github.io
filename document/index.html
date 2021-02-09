@@ -36,7 +36,7 @@ if (typeof obj[obj.length-1] == "number")
          document.getElementById("get-box").innerHTML = "<table border=10><tr><td><span style='font-size:2em'>错误</span><br><font color=red>您没有访问该页面的权限<br>因版权原因，您需要订阅该栏目才可以查看本页面<br><br><span style='background:#00ff00;color:white;font-size:1.5em;position:absolute;top:90%;right:0%' onclick=javascript:getbook('" + lang + "');>订阅</span><span style='background:red;color:white;font-size:1.5em;position:absolute;bottom:90%;right:0%' onclick=javascript:close_box_get();>X</span></td></tr></table>";
           document.getElementById("get-box").className = "show-element";
   } else
-     loadfile(obj[obj.length-1]);
+     loadfile(obj[0],obj[1],obj[obj.length-1]);
 }
 else
   {
@@ -280,7 +280,34 @@ else
                 
       });
     }
-    
+    function loadfile(..path)
+  {
+    if (!path.length)
+      return;
+    var xhr;
+    var response;
+    if (window.XMLHttpRequest)
+    {
+      xhr = new XMLHttpRequest();
+      xhr.open("GET","/" + path[0] + "/file/" + path[1] + "/document/" + path[2] + "?fromurl=" + location.href + "&requestid=" + Math.random.toString().substring(3) + "&userid=" + sessionStorage.getItem("uuid") + "&username=" + sessionStorage.getItem("username") + "&pigcoin=" + sessionStorage.getItem("pigcoin") + "&requestid=" + Math.random().toString().substring(3),false);
+      xhr.setRequestHeader("pig-code-userid",sessionStorage.getItem("uuid"));
+      xhr.setRequestHeader("get-type","xhr");
+      xhr.setRequestHeader("requestid",Math.random().toString().substring(3));
+      xhr.setRequestHeader("pig-code-server","github");
+      xhr.setRequestHeader("pig-code-database-server","bmob");
+      xhr.setRequestHeader("pig-code-method","read the document");
+      xhr.setRequestHeader("documentid",Math.random().toString().substring(3));
+      xhr.send();
+      if (xhr.readyState==4)
+        if (xhr.status==200)
+          response = decodeURI(decodeURI(decodeURI(atob(atob(atob(xhr.responseText))))));
+        else
+          response = "<span style='font-size:2em'>错误</span><br><font color=red>脚本向后端请求时发生错误<br>错误代码：" + xhr.status + "<br>断点：[line:300] /document<br><code>xhr.<font color=green>send()</font>;</code>";
+    }
+    else
+      response = "<span style='font-size:2em'>错误</span><br><font color=red>脚本向后端请求时发生错误<br>错误原因：您的浏览器不支持AJAX方法，请更换浏览器后重试<br>断点：[line:290] /document<br><code>xhr <font color=purple>=</font> <font color=blue>new</font> <font color=green>XMLHttpRequest();</font></code><br>不支持XMLHttpRequest对象</font>";
+    document.getElementById("display").innerHTML += "<br>" + response;
+  }
 //                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
 </script>
 <style>
