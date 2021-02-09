@@ -13,7 +13,9 @@ if (file.indexOf("/") == -1)
 var obj = file.split("/");
 var lang = obj[1];
 document.write("<title>" + lang + "教程 - 猪猪代码</title>");
-
+var num = parseInt(obj[obj.length-1]);
+  if (num == num)
+    obj[obj.length-1] = num;
 if (typeof obj[obj.length-1] == "number")
 {
   loadfile(obj[obj.length-1]);
@@ -27,6 +29,9 @@ else
   function backpage()
   {
     var file = location.hash.split("/");
+    var num = parseInt(file[file.length-1]);
+   if (num == num)
+    file[file.length-1] = num;
     var len = file.length-1;
     if (file[len] != 1)
       location.hash = file[0] + "/" + file[1] + "/" + (file[len] - 1);
@@ -37,6 +42,9 @@ else
   function nextpage()
   {
     var file = location.hash.split("/");
+    var num = parseInt(file[file.length-1]);
+  if (num == num)
+    file[file.length-1] = num;
     var len = file.length-1;
     if (file[len] != "index")
       location.hash = file[0] + "/" + file[1] + "/" + (file[len] + 1);
