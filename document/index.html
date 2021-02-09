@@ -1,10 +1,13 @@
 <meta charset="utf-8">
+<script src=https://pig-cmd.github.io/bmobSDK.js></script>
 <span style='font-size:3em'>猪猪代码</span><input type=button value=返回 onclick=javascript:location.href='/'><br>
 <center><pre id=display style='font-family:Cursive,Helvetica,sans-serif;white-space:pre-wrap'></pre><br>
   <input type=button value=上一章 onclick=javascript:backpage(); id=bp><input id=np type=button value=下一章 onclick=javascript:nextpage();>
 </center>
-
+    <div id=get-box class=hide-element style='position:fixed;top:50%;left:40%;color:black;background:skyblue'></div>
+    <div id=loginbox class=hide-element style='position:fixed;top:20%;left:40%;color:black;background:white'></div>
 <script>
+      Bmob.initialize("9a7dbe424a6dd457","081126");
 var file = location.hash;
 if (file == "" || file == "#")
   location.href = "/";
@@ -12,19 +15,34 @@ if (file.indexOf("/") == -1)
   location.href = "/";
 var obj = file.split("/");
 var lang = obj[1];
+  document.getElementById("display").innerHTML = "<span style='font-size:2em;color:red'>" + lang + "教程</span><br><hr>";
 document.write("<title>" + lang + "教程 - 猪猪代码</title>");
 var num = parseInt(obj[obj.length-1]);
   if (num == num)
     obj[obj.length-1] = num;
 if (typeof obj[obj.length-1] == "number")
 {
-  loadfile(obj[obj.length-1]);
+  var book = sessionStorage.getItem("book");
+  if (book == null || book == "")
+    book = {};
+  else
+    book = JSON.parse(book);
+  if (typeof book[lang] == "undefined")
+  {
+      var username = sessionStorage.getItem("username");
+      if (username == null || username == "")
+        document.getElementById("get-box").innerHTML = "<table border=10><tr><td><span style='font-size:2em'>错误</span><br><font color=red>您没有登录，因为版权原因，您需要登录并订阅该栏目才可以查看本页面<br><br><span style='background:#00ff00;color:whote;font-size:1.5em;position:absolute;top:90%;right:0%' onclick=javascript:tmp_login();>登录</span><span style='background:red;color:white;font-size:1.5em;position:absolute;bottom:90%;right:0%' onclick=javascript:close_box_get();>X</span></td></tr></table>";
+    else
+         document.getElementById("get-box").innerHTML = "<table border=10><tr><td><span style='font-size:2em'>错误</span><br><font color=red>您没有访问该页面的权限<br>因版权原因，您需要订阅该栏目才可以查看本页面<br><br><span style='background:#00ff00;color:white;font-size:1.5em;position:absolute;top:90%;right:0%' onclick=javascript:submit_form_book();>订阅</span><span style='background:red;color:white;font-size:1.5em;position:absolute;bottom:90%;right:0%' onclick=javascript:close_box_get();>X</span></td></tr></table>";
+          document.getElementById("get-box").className = "show-element";
+  }
+     loadfile(obj[obj.length-1]);
 }
 else
   {
     document.getElementById("bp").className = "hide-element";
     if (lang == "c")
-      document.getElementById("display").innerHTML = "<span style='font-size:2em;color:red'>C语言教程</span><br><hr>C语言是一门面向过程的、抽象化的通用程序设计语言，广泛应用于底层开发。C语言能以简易的方式编译、处理低级存储器。C语言是仅产生少量的机器语言以及不需要任何运行环境支持便能运行的高效率程序设计语言。尽管C语言提供了许多低级处理的功能，但仍然保持着跨平台的特性，以一个标准规格写出的C语言程序可在包括类似嵌入式处理器以及超级计算机等作业平台的许多计算机平台上进行编译。<br><strong>为什么要选择C语言</strong><br>C语言是最早的高级语言之一，面向过程，语句简单，你可以不用修改或略微修改一下你的C代码就可以跨平台使用，C嵌入到硬件中较为方便，C的效率较高，可直接操作计算机底层<br>C语言的使用广泛，著名的Windows、DOS、Unix、Linux、Mac OS、Android的内核都使用C语言来编写<br>一些著名的编程语言，如Java、Python，它们的编译器都是用C写的<br><img src=https://cdn2021.github.io/img/20210209185239.png alt=tiobe编程语言排行榜><br>可见，C语言的热度在过去20年间，始终处于上游。<br><hr><span style='font-size:2em'>下载C语言编译器</span>建议使用GCC、Clang编译器<br>安装好编译器，我们就开始学习C语言吧！";
+      document.getElementById("display").innerHTML += "C语言是一门面向过程的、抽象化的通用程序设计语言，广泛应用于底层开发。C语言能以简易的方式编译、处理低级存储器。C语言是仅产生少量的机器语言以及不需要任何运行环境支持便能运行的高效率程序设计语言。尽管C语言提供了许多低级处理的功能，但仍然保持着跨平台的特性，以一个标准规格写出的C语言程序可在包括类似嵌入式处理器以及超级计算机等作业平台的许多计算机平台上进行编译。<br><strong>为什么要选择C语言</strong><br>C语言是最早的高级语言之一，面向过程，语句简单，你可以不用修改或略微修改一下你的C代码就可以跨平台使用，C嵌入到硬件中较为方便，C的效率较高，可直接操作计算机底层<br>C语言的使用广泛，著名的Windows、DOS、Unix、Linux、Mac OS、Android的内核都使用C语言来编写<br>一些著名的编程语言，如Java、Python，它们的编译器都是用C写的<br><img src=https://cdn2021.github.io/img/20210209185239.png alt=tiobe编程语言排行榜><br>可见，C语言的热度在过去20年间，始终处于上游。<br><hr><span style='font-size:2em'>下载C语言编译器</span><br>建议使用GCC、Clang编译器<br>安装好编译器，我们就开始学习C语言吧！";
   }
   function backpage()
   {
@@ -52,6 +70,218 @@ else
       location.hash = file[0] + "/" + file[1] + "/1";
     location.reload();
   }
+     function close_box_get()
+    {
+      document.getElementById("get-box").className = "hide-element";
+    }
+    function getbook(n)
+    {
+      n = n.split("/")[1];
+      sessionStorage.setItem("bookid",n);
+      var pigcoin = sessionStorage.getItem("pigcoin");
+      pigcoin = parseInt(pigcoin);
+      var book = sessionStorage.getItem("book");
+      if (book == null || book == "")
+        book = {};
+      else
+        book = JSON.parse(book);
+      var price;
+      switch(n)
+      {
+        case "c":price = 800;break;
+        case "classic-asp":price = 500;break;
+        case "javascript":price = 600;break;
+        case "html":price = 100;break;
+        case "css":price = 500;break;
+        case "xml":price = 20;break;
+        case "json":price = 20;break;
+        case "ajax":price = 50;break;
+        case "html-dom":price = 500;break;
+        case "svg":price = 50;break;
+        case "cmd":price = 100;break;
+        default:return;
+      }
+      if (pigcoin > -0.01)
+        document.getElementById("get-box").innerHTML = "<table border=10><tr><td><span style='font-size:2em'>订阅</span><br>您订阅的是：" + n + "教程 价格：" + price + "猪头<br>您有" + pigcoin + "猪头<br><font color=red>小猪提示：您现在正在进行金钱交易<br>请谨慎操作，操作后不得撤销<br>请检查电脑中是否有木马、监控等软件<br>请检查是否有人对端口进行监听</font><br><div id=getstatus></div><br><span style='background:#00ff00;color:white;font-size:1.5em;position:absolute;top:90%;right:0%' onclick=javascript:submit_form_book();>订阅</span><span style='background:red;color:white;font-size:1.5em;position:absolute;bottom:90%;right:0%' onclick=javascript:close_box_get();>X</span></td></tr></table>";
+      else
+        document.getElementById("get-box").innerHTML = "<table border=10><tr><td><font color=red>向后端请求数据出现错误：您的猪头低于0，请联系工作人员进行处理</font><br>邮箱：<a href=mailto:fat-pig-2020@outlook.com>fat-pig-2020@outlook.com</a><br><span style='background:red;color:white;font-size:1.5em;position:absolute;bottom:90%;right:0%' onclick=javascript:close_box_get();>X</span></tr></td></table>";
+      if (typeof book[n] != "undefined")
+        document.getElementById("get-box").innerHTML = "<table border=10><tr><td><span style='font-size:2em'>订阅</span><br>您订阅的是：" + n + "教程 价格：" + price + "猪头<br>您有" + pigcoin + "猪头<br><font color=red>小猪提示：您现在正在进行金钱交易<br>请谨慎操作，操作后不得撤销<br>请检查电脑中是否有木马、监控等软件<br>请检查是否有人对端口进行监听</font><br><div id=getstatus><font color=red>您已订阅该教程，无法再次订阅</font></div><br><span style='background:red;color:white;font-size:1.5em;position:absolute;top:90%;right:0%' >订阅</span><span style='background:red;color:white;font-size:1.5em;position:absolute;bottom:90%;right:0%' onclick=javascript:close_box_get();>X</span></td></tr></table>";
+      if (price > pigcoin)
+        document.getElementById("get-box").innerHTML = "<table border=10><tr><td><span style='font-size:2em'>订阅</span><br>您订阅的是：" + n + "教程 价格：" + price + "猪头<br>您有" + pigcoin + "猪头<br><font color=red>小猪提示：您现在正在进行金钱交易<br>请谨慎操作，操作后不得撤销<br>请检查电脑中是否有木马、监控等软件<br>请检查是否有人对端口进行监听</font><br><div id=getstatus><font color=red>您的猪头不足，无法订阅</font></div><br><span style='background:red;color:white;font-size:1.5em;position:absolute;top:90%;right:0%'>订阅</span><span style='background:red;color:white;font-size:1.5em;position:absolute;bottom:90%;right:0%' onclick=javascript:close_box_get();>X</span></td></tr></table>";       
+      document.getElementById("get-box").className = "show-element";
+    }
+    function submit_form_book()
+    {
+      var price;
+      var bookid = sessionStorage.getItem("bookid");
+      switch(bookid)
+      {
+        case "c":price = 800;break;
+        case "classic-asp":price = 500;break;
+        case "javascript":price = 600;break;
+        case "html":price = 100;break;
+        case "css":price = 500;break;
+        case "xml":price = 20;break;
+        case "json":price = 20;break;
+        case "ajax":price = 50;break;
+        case "html-dom":price = 500;break;
+        case "svg":price = 50;break;
+        case "cmd":price = 100;break;
+        default:return;
+      }
+      const query = Bmob.Query("userinfo");
+      var uuid = sessionStorage.getItem("uuid");
+      query.get(uuid).then(res => {
+        console.log(res);
+        var pigcoin = res.pigcoin;
+        if (typeof res.mybook == "undefined")
+          var book = {};
+        else
+          var book = JSON.parse(res.mybook);
+        if (pigcoin > price || pigcoin == price)
+        {
+          if (typeof book[bookid] == "undefined")
+          {
+            query.set("id",res.objectId);
+            pigcoin -= price;
+            book[bookid] = true;
+            book = JSON.stringify(book);
+            query.set("pigcoin",pigcoin);
+            query.set("mybook",book);
+            query.save().then(res => {
+              console.log(res);
+              document.getElementById("getstatus").innerHTML = "<font color=#00ff00>订阅成功！</font>";
+              sessionStorage.setItem("pigcoin",pigcoin);
+              sessionStorage.setItem("book",book);
+            }).catch(err => {
+              console.log(err);
+              document.getElementById("getstatus").innerHTML = "<font color=red>未知的错误</font>";
+            });
+          } else
+            document.getElementById("getstatus").innerHTML = "<font color=red>错误：您已订阅过该教程，无法再次订阅</font>";
+        } else 
+          document.getElementById("getstatus").innerHTML = "<font color=red>错误：您的猪头不足！无法订阅</font>";
+      }).catch(err => {
+        console.log(err);
+        document.getElementById("getstatus").innerHTML = "<font color=red>未知的错误</font>";
+      });
+      
+    }
+  function tmp_login()
+  {
+    close_box_get();
+    login();
+  }
+     function login()
+    {
+      document.getElementById("loginbox").innerHTML = "<table border=10><tr><td><span style='font-size:2em'>登录</span><br>用户名<input type=text maxlength=24 id=username><br>密码<input type=password maxlength=16 id=password><br><a onclick=javascript:register();>没有账户？点我注册</a><br><div id=login-status></div><br><span style='background:#00ff00;color:white;font-size:1.5em;position:absolute;top:90%;right:0%' onclick=javascript:submit_form_login();>登录</span><span style='background:red;color:white;font-size:1.5em;position:absolute;bottom:90%;right:0%' onclick=javascript:close_box_login();>X</span></td></tr></table>";
+      document.getElementById("loginbox").className = "show-element";
+    }
+    function close_box_login()
+    {
+      document.getElementById("loginbox").className = "hide-element";
+    }
+      function register()
+    {
+      document.getElementById("loginbox").innerHTML = "<table border=10><tr><td><span style='font-size:2em'>注册</span><br>用户名<input type=text maxlength=24 id=username><br>密码<input type=password maxlength=16 id=password><br>验证密码<input type=password maxlength=16 id=password2><br><a onclick=javascript:login();>登录</a><br><div id=login-status></div><br><span style='background:#00ff00;color:white;font-size:1.5em;position:absolute;top:90%;right:0%' onclick=javascript:submit_form_register();>注册</span><span style='background:red;color:white;font-size:1.5em;position:absolute;bottom:90%;right:0%' onclick=javascript:close_box_login();>X</span></td></tr></table>";
+      document.getElementById("loginbox").className = "show-element";
+    }
+    function submit_form_login()
+    {
+      var username = document.getElementById("username").value;
+      var password = document.getElementById("password").value;
+      Bmob.User.login(username,password).then(res => {
+        console.log(res);
+        sessionStorage.setItem("username",username);
+        sessionStorage.setItem("uuid",res.uuid);
+        var i = 0;
+        var q = Bmob.Query("userinfo");
+        q.get(res.uuid).then(res => {
+          console.log(res);
+          sessionStorage.setItem("pigcoin",res.pigcoin);
+          if (typeof res.mybook == "undefined")
+            sessionStorage.setItem("book","");
+          else
+            sessionStorage.setItem("book",res.mybook);
+        }).catch(err => {
+          console.log(err);
+          document.getElementById("login-status").innerHTML = "<font color=red>未知的错误</font>";
+        });
+        setInterval(function(){
+          document.getElementById("login-status").innerHTML = "<font color=#00ff00>登录成功！将在" + (10 - i) + "秒后刷新</font>";
+          i++;
+          if (i > 10)
+            location.reload();
+        },1000);
+      }).catch(err => {
+              console.log(err);
+              if (err.code == 101)
+                document.getElementById("login-status").innerHTML = "<font color=red>登录失败！用户名或密码错误</font>";
+              else
+                document.getElementById("login-status").innerHTML = "<font color=red>未知的错误</font>";
+        });
+    }
+    function submit_form_register()
+    {
+      var username = document.getElementById("username").value;
+      var password = document.getElementById("password").value;
+      var p2 = document.getElementById("password2").value;
+      if (p2 != password)
+      {
+        document.getElementById("login-status").innerHTML = "<font color=red>注册失败！密码与验证密码不符</font>";
+        return;
+      }
+      if (username.length < 8 || password.length < 8 || username.length > 24 || password.length > 16)
+      {
+        document.getElementById("login-status").innerHTML = "<font color=red>注册失败！用户名或密码过短或过长<br>用户名长度应该为8~24字<br>密码长度应该为8~16位</font>";
+        return;
+      }
+      var email = Math.random().toString().substring(3) + "@smtp.pig.org";
+      var phone = parseInt(Math.random().toString().substring(3,14));
+      let userinfo = {"username":username,"password":password,"phone":phone,"email":email};
+      var q = Bmob.Query("userinfo");
+      q.set("username",username);
+      q.set("password",password);
+      q.set("pigcoin",0);
+      q.set("mybook","{}");
+      q.save().then(res=> {
+        var r1 = res;
+        console.log(res);
+        userinfo.uuid = r1.objectId;
+        Bmob.User.register(userinfo).then(res => {
+          console.log(res);
+          sessionStorage.setItem("username",username);
+          sessionStorage.setItem("uuid",r1.objectId);
+          sessionStorage.setItem("pigcoin",0);
+          sessionStorage.setItem("book","");
+         var i = 0;
+         setInterval(function(){
+            document.getElementById("login-status").innerHTML = "<font color=#00ff00>注册成功！将在" + (10 - i) + "秒后刷新</font>";
+            i++;
+            if (i > 10)
+             location.reload();
+          },1000);
+        }).catch(err => {
+               console.log(err);
+              if (err.code != 202)
+                document.getElementById("login-status").innerHTML = "<font color=red>未知的错误</font>";
+               if (err.code == 400 || err.code == 203)
+                  submit_form_register();
+                if (err.code == 202)
+                  document.getElementById("login-status").innerHTML = "<font color=red>注册失败！用户名重复！</font>";
+
+                 
+         });
+     }).catch(err => {
+        console.log(err);
+      document.getElementById("login-status").innerHTML = "<font color=red>未知的错误</font>";
+        submit_form_register();
+
+                
+      });
+    }
+    
 //                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
 </script>
 <style>
