@@ -1,0 +1,22 @@
+<meta charset="utf-8">
+<script>
+var file = location.hash;
+if (file == "" || file == "#")
+  location.href = "/";
+if (file.indexOf("/") == -1)
+  location.href = "/";
+var obj = file.split("/");
+var lang = obj[1];
+document.write("<title>" + lang + "教程 - 猪猪代码");
+
+if (typeof obj[obj.length-1] == "number")
+  loadfile();
+else
+  {
+    if (lang == "c")
+      document.getElementById("display").innerHTML = "<span style='font-size:2em;color:red'>C语言教程></span><br><hr>C语言是一门面向过程的、抽象化的通用程序设计语言，广泛应用于底层开发。C语言能以简易的方式编译、处理低级存储器。C语言是仅产生少量的机器语言以及不需要任何运行环境支持便能运行的高效率程序设计语言。尽管C语言提供了许多低级处理的功能，但仍然保持着跨平台的特性，以一个标准规格写出的C语言程序可在包括类似嵌入式处理器以及超级计算机等作业平台的许多计算机平台上进行编译。<br><strong>为什么要选择C语言</strong><br>C语言是最早的高级语言之一，面向过程，语句简单，你可以不用修改或略微修改一下你的C代码就可以跨平台使用，C嵌入到硬件中较为方便，C的效率较高，可直接操作计算机底层<br>C语言的使用广泛，著名的Windows、DOS、Unix、Linux的内核都使用C语言来编写<br>";
+  }
+//                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+</script>
+<span style='font-size:3em'>猪猪代码</span><input type=button value=返回 onclick=javascript:location.href='/'>
+<center><pre id=display style='font-family:Cursive,Helvetica,sans-serif;white-space:pre-wrap'></pre></center>
