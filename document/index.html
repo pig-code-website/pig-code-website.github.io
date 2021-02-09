@@ -33,9 +33,9 @@ if (typeof obj[obj.length-1] == "number")
       if (username == null || username == "")
         document.getElementById("get-box").innerHTML = "<table border=10><tr><td><span style='font-size:2em'>错误</span><br><font color=red>您没有登录，因为版权原因，您需要登录并订阅该栏目才可以查看本页面<br><br><span style='background:#00ff00;color:whote;font-size:1.5em;position:absolute;top:90%;right:0%' onclick=javascript:tmp_login();>登录</span><span style='background:red;color:white;font-size:1.5em;position:absolute;bottom:90%;right:0%' onclick=javascript:close_box_get();>X</span></td></tr></table>";
     else
-         document.getElementById("get-box").innerHTML = "<table border=10><tr><td><span style='font-size:2em'>错误</span><br><font color=red>您没有访问该页面的权限<br>因版权原因，您需要订阅该栏目才可以查看本页面<br><br><span style='background:#00ff00;color:white;font-size:1.5em;position:absolute;top:90%;right:0%' onclick=javascript:submit_form_book();>订阅</span><span style='background:red;color:white;font-size:1.5em;position:absolute;bottom:90%;right:0%' onclick=javascript:close_box_get();>X</span></td></tr></table>";
+         document.getElementById("get-box").innerHTML = "<table border=10><tr><td><span style='font-size:2em'>错误</span><br><font color=red>您没有访问该页面的权限<br>因版权原因，您需要订阅该栏目才可以查看本页面<br><br><span style='background:#00ff00;color:white;font-size:1.5em;position:absolute;top:90%;right:0%' onclick=javascript:getbook(" + lang + ");>订阅</span><span style='background:red;color:white;font-size:1.5em;position:absolute;bottom:90%;right:0%' onclick=javascript:close_box_get();>X</span></td></tr></table>";
           document.getElementById("get-box").className = "show-element";
-  }
+  } else
      loadfile(obj[obj.length-1]);
 }
 else
