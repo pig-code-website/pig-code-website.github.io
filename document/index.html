@@ -1,4 +1,7 @@
 <meta charset="utf-8">
+<span style='font-size:3em'>猪猪代码</span><input type=button value=返回 onclick=javascript:location.href='/'>
+<center><pre id=display style='font-family:Cursive,Helvetica,sans-serif;white-space:pre-wrap'></pre></center>
+
 <script>
 var file = location.hash;
 if (file == "" || file == "#")
@@ -7,7 +10,7 @@ if (file.indexOf("/") == -1)
   location.href = "/";
 var obj = file.split("/");
 var lang = obj[1];
-document.write("<title>" + lang + "教程 - 猪猪代码");
+document.write("<title>" + lang + "教程 - 猪猪代码</title>");
 
 if (typeof obj[obj.length-1] == "number")
   loadfile();
@@ -18,5 +21,3 @@ else
   }
 //                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
 </script>
-<span style='font-size:3em'>猪猪代码</span><input type=button value=返回 onclick=javascript:location.href='/'>
-<center><pre id=display style='font-family:Cursive,Helvetica,sans-serif;white-space:pre-wrap'></pre></center>
