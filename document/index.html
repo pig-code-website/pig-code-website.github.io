@@ -282,6 +282,7 @@ else
     }
     function loadfile(...path)
   {
+    console.log(path);
     if (!path.length)
       return;
     var xhr;
@@ -289,7 +290,9 @@ else
     if (window.XMLHttpRequest)
     {
       xhr = new XMLHttpRequest();
-      xhr.open("GET","/" + path[0] + "/file/" + path[1] + "/document/" + path[2] + "?fromurl=" + location.href + "&requestid=" + Math.random.toString().substring(3) + "&userid=" + sessionStorage.getItem("uuid") + "&username=" + sessionStorage.getItem("username") + "&pigcoin=" + sessionStorage.getItem("pigcoin") + "&requestid=" + Math.random().toString().substring(3),false);
+      var filepath = "/" + path[0] + "/file/" + path[1] + "/document/" + path[2] + "?fromurl=" + location.href + "&requestid=" + Math.random.toString().substring(3) + "&userid=" + sessionStorage.getItem("uuid") + "&username=" + sessionStorage.getItem("username") + "&pigcoin=" + sessionStorage.getItem("pigcoin") + "&requestid=" + Math.random().toString().substring(3);
+      xhr.open("GET",filepath,false);
+      console.log(filepath);
       xhr.setRequestHeader("pig-code-userid",sessionStorage.getItem("uuid"));
       xhr.setRequestHeader("get-type","xhr");
       xhr.setRequestHeader("requestid",Math.random().toString().substring(3));
