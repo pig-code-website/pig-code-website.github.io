@@ -307,7 +307,7 @@ else
         if (xhr.status==200)
           response = decodeURI(decodeURI(decodeURI(atob(atob(atob(xhr.responseText))))));
         else
-          response = "<span style='font-size:2em'>错误</span><br><font color=red>脚本向后端请求时发生错误<br>错误代码：" + xhr.status + "<br>断点：[line:300] /document<br><code>xhr.<font color=green>send()</font>;</code>";
+          response = "<span style='font-size:2em'>错误</span><br><font color=red>脚本向后端请求时发生错误<br>错误代码：" + xhr.status + "<br>断点：[line:300] /document<br><code>xhr.<font color=green>send()</font>;</code><br>请求文件：<font color=blue>" + filepath + "</font>";
     }
     else
       response = "<span style='font-size:2em'>错误</span><br><font color=red>脚本向后端请求时发生错误<br>错误原因：您的浏览器不支持AJAX方法，请更换浏览器后重试<br>断点：[line:290] /document<br><code>xhr <font color=purple>=</font> <font color=blue>new</font> <font color=green>XMLHttpRequest();</font></code><br>不支持XMLHttpRequest对象</font>";
