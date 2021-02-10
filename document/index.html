@@ -292,7 +292,7 @@ else
     if (window.XMLHttpRequest)
     {
       xhr = new XMLHttpRequest();
-      var filepath = "/" + path[0] + "/file/" + path[1] + "/document/" + path[2] + "?fromurl=" + encodeURI(location.href) + "&requestid=" + Math.random().toString().substring(3) + "&userid=" + sessionStorage.getItem("uuid") + "&username=" + sessionStorage.getItem("username") + "&pigcoin=" + sessionStorage.getItem("pigcoin") + "&requestid=" + Math.random().toString().substring(3);
+      var filepath = "/" + path[0] + "/file/" + path[1] + "/document/" + path[2] + ".txt?fromurl=" + encodeURI(location.href) + "&requestid=" + Math.random().toString().substring(3) + "&userid=" + sessionStorage.getItem("uuid") + "&username=" + sessionStorage.getItem("username") + "&pigcoin=" + sessionStorage.getItem("pigcoin") + "&requestid=" + Math.random().toString().substring(3);
       xhr.open("GET",filepath,false);
       console.log(filepath);
       xhr.setRequestHeader("pig-code-userid",sessionStorage.getItem("uuid"));
