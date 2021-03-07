@@ -11,7 +11,9 @@ function runcode()
 {
   document.getElementById("display").innerHTML = "<iframe id=frame border=1 height=100% width=100%>不支持此框架，请更换浏览器</iframe>";
   var code = document.getElementById("code").value;
+  setTimeout(function(){
   document.getElementById("frame").contentWindow.window.document.write(code);
   document.getElementById("frame").contentWindow.window.document.write("<script src=https://pig-code-website.github.io/tool/html-js-css/console.js></script>");
+  },200);
 };
 </script>
