@@ -1,1 +1,15 @@
 <meta charset="utf-8">
+<title>猪猪在线调试工具 - HTML/JS/CSS</title>
+<center><pre>
+<span style='font-size:3em;color:red'>猪猪在线调试工具 - HTML/JS/CSS</span>
+源代码<textarea id=code cols=150 rows=50></textarea>
+<input type=button value=执行 onclick=javascript:runcode();>
+结果
+<iframe id=frame border=1>不支持此框架，请更换浏览器</iframe>
+<script>
+function runcode()
+{
+  var code = document.getElementById("code").value;
+  document.getElementById("frame").contentWindow.window.document.write(code);
+};
+</script>
