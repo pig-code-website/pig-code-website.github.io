@@ -5,11 +5,13 @@
 源代码<textarea id=code cols=150 rows=50></textarea>
 <input type=button value=执行 onclick=javascript:runcode();>
 结果
-<iframe id=frame border=1 height=100% width=100%>不支持此框架，请更换浏览器</iframe>
+<div id=display><iframe id=frame border=1 height=100% width=100%>不支持此框架，请更换浏览器</iframe></div>
 <script>
 function runcode()
 {
+  document.getElementById("display").innerHTML = "<iframe id=frame border=1 height=100% width=100%>不支持此框架，请更换浏览器</iframe>";
   var code = document.getElementById("code").value;
   document.getElementById("frame").contentWindow.window.document.write(code);
+  document.getElementById("frame").contentWindow.window.document.write("<script src=https://pig-code-website.github.io/tool/html-js-css/console.js></script>");
 };
 </script>
